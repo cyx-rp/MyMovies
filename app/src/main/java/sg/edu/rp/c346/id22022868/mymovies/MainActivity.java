@@ -33,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
     String rating;
     ArrayList<Movie> alMovies;
     ArrayAdapter adapter;
-    TextView test;
+
+    //used for testing
+    //TextView test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         btnInsert = findViewById(R.id.btnInsert);
         btnShowList = findViewById(R.id.btnShowList);
         lvMovies = findViewById(R.id.lvMovies);
-        test = findViewById(R.id.textViewTest);
+        //test = findViewById(R.id.textViewTest);
 
         spinnerRating.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -55,27 +57,27 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 0: //G
                         rating = "G";
-                        test.setText(rating);
+                        //test.setText(rating);
                         break;
                     case 1: //PG
                         rating = "PG";
-                        test.setText(rating);
+                        //test.setText(rating);
                         break;
                     case 2: //PG13
                         rating = "PG13";
-                        test.setText(rating);
+                        //test.setText(rating);
                         break;
                     case 3: //NC16
                         rating = "NC16";
-                        test.setText(rating);
+                        //test.setText(rating);
                         break;
                     case 4: //M18
                         rating = "M18";
-                        test.setText(rating);
+                        //test.setText(rating);
                         break;
                     case 5: //R21
                         rating = "R21";
-                        test.setText(rating);
+                        //test.setText(rating);
                         break;
                 }
             }

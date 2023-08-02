@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
@@ -16,19 +17,26 @@ import java.util.ArrayList;
 
 public class ListViewActivity extends AppCompatActivity {
 
-    Button btnPG13;
+    //Button btnPG13;
+    Button btnRating; //enhancement
     ListView lvMovies;
     ArrayList<Movie> movies;
     CustomAdapter adapter;
     //ArrayAdapter adapter;
+    Spinner spinnerRating;
+    String keyword;
+    String rating;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
 
-        btnPG13 = findViewById(R.id.btnPG13);
+        //btnPG13 = findViewById(R.id.btnPG13);
+        btnRating = findViewById(R.id.btnPG13);
         lvMovies = findViewById(R.id.lvMovies);
+        spinnerRating = findViewById(R.id.spinner2);
 
         //setting listview components
         movies = new ArrayList<Movie>();
@@ -47,13 +55,62 @@ public class ListViewActivity extends AppCompatActivity {
         //Closing database connection
         db.close();
 
-        btnPG13.setOnClickListener(new View.OnClickListener() {
+        //before enhancement
+/*        btnPG13.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 movies.clear();
 
                 movies.addAll(db.filterPG13("PG13"));
+
+                //songs = rated5;
+
+                adapter.notifyDataSetChanged();
+
+            }
+        });*/
+
+        //Enhancement
+        spinnerRating.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0: //G
+                        keyword = "G";
+                        break;
+                    case 1: //PG
+                        keyword = "PG";
+                        break;
+                    case 2: //PG13
+                        keyword = "PG13";
+                        break;
+                    case 3: //NC16
+                        keyword = "NC16";
+                        break;
+                    case 4: //M18
+                        keyword = "M18";
+                        break;
+                    case 5: //R21
+                        keyword = "R21";
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //Enhancement
+        btnRating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                movies.clear();
+
+                movies.addAll(db.filterRating(keyword));
 
                 //songs = rated5;
 
@@ -93,6 +150,8 @@ public class ListViewActivity extends AppCompatActivity {
 
 
 
+
+
     }
 
     @Override
@@ -107,7 +166,6 @@ public class ListViewActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
     }
-
 
 
 
